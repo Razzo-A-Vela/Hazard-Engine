@@ -6,8 +6,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "Vector2.hpp"
-#include "Window.hpp"
+#include "types\Vector2.hpp"
+#include "types\Window.hpp"
 #include "Painthandler.hpp"
 #include "FontHandler.hpp"
 

@@ -4,9 +4,9 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "Vector2.hpp"
-#include "Window.hpp"
-#include "Color.hpp"
+#include "types\Vector2.hpp"
+#include "types\Window.hpp"
+#include "types\Color.hpp"
 #include "FontHandler.hpp"
 
 class PaintHandler {
