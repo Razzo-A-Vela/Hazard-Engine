@@ -1,0 +1,33 @@
+#pragma once
+#define SDL_MAIN_HANDLED
+#include <SDL.h>
+
+struct Color {
+  Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) : r(r), g(g), b(b), a(a) {}
+
+  Color setAlpha(Uint8 alpha) {
+    return Color(r, g, b, alpha);
+  }
+
+  SDL_Color toSDL() {
+    return {r, g, b, a};
+  }
+
+  Uint32 toSDL(SDL_Surface* windowSurface) {
+    return SDL_MapRGBA(windowSurface->format, r, g, b, a);
+  }
+
+  void toRenderer(SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+  }
+
+  Uint8 r;
+  Uint8 g;
+  Uint8 b;
+  Uint8 a;
+};
+
+namespace Colors {
+  const Color BLACK = Color(0, 0, 0);
+  const Color WHITE = Color(255, 255, 255);
+}

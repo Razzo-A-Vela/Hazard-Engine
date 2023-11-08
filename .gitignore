@@ -1,0 +1,5 @@
+
+.vscode/
+test/Test.exe
+test/SDL2.dll
+test/SDL2_ttf.dll
