@@ -8,15 +8,15 @@ int main() {
   FontHandler::addFont("Title", "comic-sans-ms.ttf", 32);
   FontHandler::addFont("Subtitle", "comic-sans-ms.ttf", 16);
   FontHandler::setDefaultFont("Title");
-  
+
   Hazard::createWindow("Prova", Vector2Int(500, 500));
   static float x = 0;
   static bool showText = false;
   static std::stringstream msg;
 
   Hazard::onUpdate([](double deltaTime) {
-    if (Input::isPressed(Keys::Space))
-      x += deltaTime * 10 * (Input::isPressed(Keys::LShift) ? 10 : 1);
+    if (Input::keyPressed(Keys::Space))
+      x += deltaTime * 10 * (Input::keyPressed(Keys::LShift) ? 10 : 1);
 
     if (Input::keyDown(Keys::toKeyCode('r')))
       x = 0;
@@ -25,7 +25,7 @@ int main() {
       showText = !showText;
 
     if (Input::keyUp(Keys::Escape))
-      Hazard::quit(); 
+      Hazard::quit();
   });
 
   Hazard::onDraw([](PaintHandler* handler) {
@@ -49,6 +49,8 @@ int main() {
 
     Input::inputString(&msg);
     handler->drawText(Vector2Int(0, size.y + otherSize.y + 10), "Chars: " + msg.str());
+    handler->setColor(Input::mousePressed(1) ? Colors::BLUE : Colors::RED);
+    handler->drawRect(Input::getMousePos() - 5, Vector2Int(10, 10), true);
   });
 
   Hazard::onQuit([]() {
