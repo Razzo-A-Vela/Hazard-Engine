@@ -28,6 +28,6 @@ struct Color {
 };
 
 namespace Colors {
-  const Color BLACK = Color(0, 0, 0);
-  const Color WHITE = Color(255, 255, 255);
+  static const Color BLACK = Color(0, 0, 0);
+  static const Color WHITE = Color(255, 255, 255);
 }
