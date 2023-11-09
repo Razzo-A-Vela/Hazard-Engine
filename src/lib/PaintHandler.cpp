@@ -18,6 +18,8 @@ void PaintHandler::fillBackground(Color color) {
 Vector2Int PaintHandler::drawText(Vector2Int pos, std::string text) {
   TTF_Font* font = currentFont == DEFAULT_FONT ? FontHandler::getDefaultFont() : FontHandler::getFont(currentFont);
   SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), currentColor.toSDL());
+  if (surface == NULL) return Vector2Int();
+  
   SDL_Texture* texture = SDL_CreateTextureFromSurface(window->renderer, surface);
   SDL_Rect rect;
   rect.x = pos.x;
