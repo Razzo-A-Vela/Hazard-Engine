@@ -9,12 +9,6 @@ void PaintHandler::drawRect(Vector2Int pos, Vector2Int size, bool fill) {
     SDL_RenderDrawRect(window->renderer, &rect);
 }
 
-void PaintHandler::fillBackground(Color color) {
-  color.setAlpha(255).toRenderer(window->renderer);
-  SDL_RenderClear(window->renderer);
-}
-
-//TODO: add drawing of text
 Vector2Int PaintHandler::drawText(Vector2Int pos, std::string text) {
   TTF_Font* font = currentFont == DEFAULT_FONT ? FontHandler::getDefaultFont() : FontHandler::getFont(currentFont);
   SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), currentColor.toSDL());
@@ -31,4 +25,9 @@ Vector2Int PaintHandler::drawText(Vector2Int pos, std::string text) {
   SDL_FreeSurface(surface);
   SDL_DestroyTexture(texture);
   return { rect.w, rect.h };
+}
+
+void PaintHandler::fillBackground(Color color) {
+  color.setAlpha(255).toRenderer(window->renderer);
+  SDL_RenderClear(window->renderer);
 }

@@ -8,6 +8,7 @@ int main() {
   FontHandler::addFont("Title", "comic-sans-ms.ttf", 32);
   FontHandler::addFont("Subtitle", "comic-sans-ms.ttf", 16);
   FontHandler::setDefaultFont("Title");
+  
   Hazard::createWindow("Prova", Vector2Int(500, 500));
   static float x = 0;
   static bool showText = false;

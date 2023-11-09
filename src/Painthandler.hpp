@@ -13,9 +13,10 @@ class PaintHandler {
 public:
   PaintHandler(Window* window) : window(window) {}
   void drawRect(Vector2Int pos, Vector2Int size, bool fill);
-  void fillBackground(Color color);
-  void setColor(Color color) { currentColor = color; }
   Vector2Int drawText(Vector2Int pos, std::string text);
+  void fillBackground(Color color);
+
+  void setColor(Color color) { currentColor = color; }
   void setFont(std::string font) { currentFont = font; }
 
   static inline const std::string DEFAULT_FONT = "";
