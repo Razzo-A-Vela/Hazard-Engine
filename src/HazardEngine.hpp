@@ -10,6 +10,7 @@
 #include "types\Window.hpp"
 #include "Painthandler.hpp"
 #include "FontHandler.hpp"
+#include "Input.hpp"
 
 
 typedef void (*update_func)(double);
@@ -25,9 +26,7 @@ public:
   static void onUpdate(update_func update) { updateFunc = update; }
   static void onDraw(draw_func draw) { drawFunc = draw; }
   static void onQuit(quit_func quit) { quitFunc = quit; }
-  static int getFPS() {
-    return fps;
-  }
+  static int getFPS() { return fps; }
 
 private:
   static inline int fps = 0;

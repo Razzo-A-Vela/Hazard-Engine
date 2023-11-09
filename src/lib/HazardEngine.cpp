@@ -5,6 +5,7 @@ void Hazard::init() {
   std::cout << "Initializing Hazard Engine...\n";
   SDL_Init(SDL_INIT_VIDEO);
   TTF_Init();
+  Input::init();
   initialized = true;
 }
 
@@ -37,8 +38,10 @@ void Hazard::run() {
   while (!quit) {
     auto start = std::chrono::system_clock::now();
 
+    Input::reset();
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) quit = true;
+      else Input::update(&e);
     }
     updateFunc(deltaTime);
 
