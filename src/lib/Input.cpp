@@ -30,19 +30,43 @@ void Input::update(SDL_Event* event) {
 
     if (keysPressed.count(key) == 0) return;
     if (!keysPressed.at(key)) keysDown.emplace(key);
+    keysDownRepeating.emplace(key);
     keysPressed.at(key) = true;
+
   } else if (event->type == SDL_KEYUP) {
     KeyCode key = event->key.keysym.sym;
 
     if (keysPressed.count(key) == 0) return;
     keysUp.emplace(key);
     keysPressed.at(key) = false;
+
+  } else if (event->type == SDL_MOUSEMOTION) {
+    mousePos = Vector2Int(event->motion.x, event->motion.y);
+
+  } else if (event->type == SDL_MOUSEBUTTONDOWN) {
+    mousePos = Vector2Int(event->button.x, event->button.y);
+
+    mouseButtonsPressed[event->button.button - 1] = true;
+    mouseButtonsDown[event->button.button - 1] = true;
+
+  } else if (event->type == SDL_MOUSEBUTTONUP) {
+    mousePos = Vector2Int(event->button.x, event->button.y);
+
+    mouseButtonsPressed[event->button.button - 1] = false;
+    mouseButtonsUp[event->button.button - 1] = true;
+
   }
 }
 
 void Input::reset() {
+  keysDownRepeating.clear();
   keysDown.clear();
   keysUp.clear();
+  
+  for (int i = 0; i < 3; i++) {
+    mouseButtonsDown[i] = false;
+    mouseButtonsUp[i] = false;
+  }
 }
 
 std::unordered_set<KeyCode> Input::getPressedKeys() {
@@ -56,7 +80,7 @@ std::unordered_set<KeyCode> Input::getPressedKeys() {
 
 void Input::inputString(std::stringstream* stream) {
   char c = 0;
-  for (KeyCode key : keysDown) {
+  for (KeyCode key : keysDownRepeating) {
     if (key == Keys::Backspace) {
       std::string str = stream->str();
       if (str.size() == 0) return;
@@ -68,27 +92,12 @@ void Input::inputString(std::stringstream* stream) {
     } else if (key == Keys::Space)
       (*stream) << ' ';
 
-    else if (!isMod(key) && key >= 33 && key <= 126) {
+    else if (!Keys::isMod(key) && key >= 33 && key <= 126) {
       c = key;
       break;
     }
   }
 
-  if (isPressed(Keys::LShift) || isPressed(Keys::RShift)) c = std::toupper(c);
+  if (keyPressed(Keys::LShift) || keyPressed(Keys::RShift)) c = std::toupper(c);
   if (c != 0) (*stream) << c;
-}
-
-bool Input::isMod(KeyCode key) {
-  switch (key) {
-    case Keys::LShift:
-    case Keys::LCtrl:
-    case Keys::LAlt:
-    case Keys::RShift:
-    case Keys::RCtrl:
-    case Keys::RAlt:
-      return true;
-
-    default:
-      return false;
-  }
 }
