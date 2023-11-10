@@ -27,6 +27,7 @@ public:
   static void onDraw(draw_func draw) { drawFunc = draw; }
   static void onQuit(quit_func quit) { quitFunc = quit; }
   static int getFPS() { return fps; }
+  static Vector2Int getWindowSize() { return window->size; }
 
 private:
   static inline int fps = 0;
