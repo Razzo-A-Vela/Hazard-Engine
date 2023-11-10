@@ -10,16 +10,17 @@ int main() {
   FontHandler::setDefaultFont("Title");
 
   Hazard::createWindow("Prova", Vector2Int(500, 500));
-  static float x = 0;
+
+  static Vector2 playerPos = (Hazard::getWindowSize() / 2).toFloat();
+  static const Vector2Int playerSize(50, 50);
+  static const float playerSpeed = 100;
   static bool showText = false;
   static std::stringstream msg;
 
   Hazard::onUpdate([](double deltaTime) {
-    if (Input::keyPressed(Keys::Space))
-      x += deltaTime * 10 * (Input::keyPressed(Keys::LShift) ? 10 : 1);
-
-    if (Input::keyDown(Keys::toKeyCode('r')))
-      x = 0;
+    float horizontal = Input::getAxis(Axis::horizontal) * playerSpeed * deltaTime;
+    float vertical = Input::getAxis(Axis::vertical) * playerSpeed * deltaTime * -1;
+    playerPos = playerPos + Vector2(horizontal, vertical) * (Input::keyPressed(Keys::LShift) ? 2 : 1);
 
     if (Input::keyDown(Keys::toKeyCode('m')))
       showText = !showText;
@@ -30,8 +31,10 @@ int main() {
 
   Hazard::onDraw([](PaintHandler* handler) {
     handler->fillBackground(Colors::BLACK);
+    handler->setColor(Colors::YELLOW);
+    handler->drawRect(playerPos.toInt() - (playerSize / 2), playerSize, true);
+    
     handler->setColor(Colors::WHITE);
-    handler->drawRect(Vector2Int(250 + x, 250), Vector2Int(100, 100), true);
     Vector2Int size = handler->drawText(Vector2Int(0, 0), "FPS: " + std::to_string(Hazard::getFPS()));
     Vector2Int otherSize;
 
