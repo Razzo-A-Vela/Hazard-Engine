@@ -50,6 +50,13 @@ namespace Keys {
   }
 }
 
+enum class Axis {
+  horizontal,
+  vertical,
+  mouseX,
+  mouseY
+};
+
 class Input {
 public:
   static void init();
@@ -67,6 +74,7 @@ public:
   static bool mousePressed(int mouseButton) { return mouseButtonsPressed[mouseButton - 1]; }
   static bool mouseDown(int mouseButton) { return mouseButtonsDown[mouseButton - 1]; }
   static bool mouseUp(int mouseButton) { return mouseButtonsUp[mouseButton - 1]; }
+  static float getAxis(Axis axis);
 
 private:
   static inline std::unordered_map<KeyCode, bool> keysPressed;
@@ -75,6 +83,7 @@ private:
   static inline std::unordered_set<KeyCode> keysUp;
 
   static inline Vector2Int mousePos;
+  static inline Vector2 mouseRel;
   static inline bool mouseButtonsPressed[3] = { false };
   static inline bool mouseButtonsDown[3] = { false };
   static inline bool mouseButtonsUp[3] = { false };

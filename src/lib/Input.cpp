@@ -42,6 +42,7 @@ void Input::update(SDL_Event* event) {
 
   } else if (event->type == SDL_MOUSEMOTION) {
     mousePos = Vector2Int(event->motion.x, event->motion.y);
+    mouseRel = Vector2Int(event->motion.xrel, event->motion.yrel).toFloat();
 
   } else if (event->type == SDL_MOUSEBUTTONDOWN) {
     mousePos = Vector2Int(event->button.x, event->button.y);
@@ -100,4 +101,29 @@ void Input::inputString(std::stringstream* stream) {
 
   if (keyPressed(Keys::LShift) || keyPressed(Keys::RShift)) c = std::toupper(c);
   if (c != 0) (*stream) << c;
+}
+
+float Input::getAxis(Axis axis) {
+  float w, a, s, d;
+
+  switch (axis) {
+    case Axis::horizontal:
+      d = keyPressed(Keys::toKeyCode('d')) ? 1 : 0;
+      a = keyPressed(Keys::toKeyCode('a')) ? 1 : 0;
+      return d - a;
+
+    case Axis::vertical:
+      w = keyPressed(Keys::toKeyCode('w')) ? 1 : 0;
+      s = keyPressed(Keys::toKeyCode('s')) ? 1 : 0;
+      return w - s;
+    
+    case Axis::mouseX:
+      return mouseRel.x;
+    
+    case Axis::mouseY:
+      return mouseRel.y;
+
+    default:
+      return 0;
+  }
 }
