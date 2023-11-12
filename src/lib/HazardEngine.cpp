@@ -60,6 +60,4 @@ void Hazard::run() {
       timePassed -= 1;
     }
   }
-
-  Hazard::quit();
 }
