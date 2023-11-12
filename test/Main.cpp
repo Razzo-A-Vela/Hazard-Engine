@@ -61,5 +61,6 @@ int main() {
   });
 
   Hazard::run();
+  Hazard::quit();
   return EXIT_SUCCESS;
 }
