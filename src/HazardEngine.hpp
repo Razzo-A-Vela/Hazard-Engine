@@ -13,8 +13,8 @@
 #include "Input.hpp"
 
 
-typedef void (*update_func)(double);
-typedef void (*draw_func)(PaintHandler*);
+typedef void (*update_func)(double deltaTime);
+typedef void (*draw_func)(PaintHandler* handler);
 typedef void (*quit_func)(void);
 
 class Hazard {

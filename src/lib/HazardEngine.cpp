@@ -19,13 +19,13 @@ void Hazard::createWindow(std::string title, Vector2Int size) {
 }
 
 void Hazard::quit() {
-  quitFunc();
+  if (quitFunc != NULL) quitFunc();
   FontHandler::close();
+  TTF_Quit();
   SDL_DestroyRenderer(window->renderer);
   SDL_DestroyWindow(window->window);
   SDL_Quit();
-  TTF_Quit();
-  exit(EXIT_SUCCESS);
+  initialized = false;
 }
 
 void Hazard::run() {
@@ -43,10 +43,10 @@ void Hazard::run() {
       if (e.type == SDL_QUIT) quit = true;
       else Input::update(&e);
     }
-    updateFunc(deltaTime);
+    if (updateFunc != NULL) updateFunc(deltaTime);
 
     PaintHandler handler = PaintHandler(window);
-    drawFunc(&handler);
+    if (drawFunc != NULL) drawFunc(&handler);
     SDL_RenderPresent(window->renderer);
 
     auto end = std::chrono::system_clock::now();
@@ -57,7 +57,7 @@ void Hazard::run() {
     if (timePassed >= 1) {
       fps = frames;
       frames = 0;
-      timePassed = 0;
+      timePassed -= 1;
     }
   }
 
