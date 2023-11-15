@@ -5,62 +5,44 @@
 
 int main() {
   Hazard::init();
-  FontHandler::addFont("Title", "comic-sans-ms.ttf", 32);
-  FontHandler::addFont("Subtitle", "comic-sans-ms.ttf", 16);
-  FontHandler::setDefaultFont("Title");
+  FontHandler::addFont("", ".\\comic-sans-ms.ttf", 32);
 
   Hazard::createWindow("Prova", { 500, 500 });
-
-  static Vector2 playerPos = (Hazard::getWindowSize() / 2).toFloat();
-  static const Vector2Int playerSize = { 50, 50 };
-  static const float playerSpeed = 100;
-  static bool showText = false;
-  static std::stringstream msg;
+  static Rect player = { (Hazard::getWindowSize() / 2).toFloat(), { 50, 50 } };
+  player.pos = player.pos - player.size / 2.0f;
+  static RectInt mouse = { { 0, 0 }, { 10, 10 } };
+  static const RectInt otherRect = { { 250, 100 }, { 100, 100 } };
 
   Hazard::onUpdate([](double deltaTime) {
-    float horizontal = Input::getAxis(Axis::horizontal) * playerSpeed * deltaTime;
-    float vertical = Input::getAxis(Axis::vertical) * playerSpeed * deltaTime;
-    playerPos = playerPos + Vector2(horizontal, -vertical) * (Input::keyPressed(Keys::LShift) ? 2 : 1);
+    float horizontal = Input::getAxis(Axis::horizontal);
+    float vertical = Input::getAxis(Axis::vertical);
+    player.pos = player.pos + Vector2(horizontal, -vertical) * 150 * deltaTime;
 
-    if (Input::keyDown(Keys::toKeyCode('m')))
-      showText = !showText;
-
-    if (Input::keyUp(Keys::Escape))
-      Hazard::quit();
+    mouse.pos = Input::getMousePos() - (mouse.size / 2);
+    
+    if (Input::keyDown(Keys::Escape)) 
+      Hazard::quit(1);
   });
 
   Hazard::onDraw([](PaintHandler* handler) {
     handler->fillBackground(Colors::BLACK);
+
+    if (player.collidesWith(otherRect.toFloat()))
+      handler->setColor(Colors::BLUE);
+    else
+      handler->setColor(Colors::CYAN);
+    otherRect.render(handler, true);
+
     handler->setColor(Colors::YELLOW);
-    handler->drawRect(playerPos.toInt() - (playerSize / 2), playerSize, true);
-    
+    player.render(handler, true);
+
     handler->setColor(Colors::WHITE);
-    Vector2Int size = handler->drawText({ 0, 0 }, "FPS: " + std::to_string(Hazard::getFPS()));
-    Vector2Int otherSize;
+    handler->drawText({ 0, 0 }, "FPS: " + std::to_string(Hazard::getFPS()));
 
-    if (showText) {
-      std::stringstream pressedKeysMsg;
-      pressedKeysMsg << "Pressed keys: ";
-
-      auto keys = Input::getPressedKeys();
-      for (auto key = keys.begin(); key != keys.end(); key++)
-        pressedKeysMsg << Keys::toString(*key) << ", ";
-
-      handler->setFont("Subtitle");
-      otherSize = handler->drawText({ 0, size.y + 5 }, pressedKeysMsg.str());
-    }
-
-    Input::inputString(&msg);
-    handler->drawText({ 0, size.y + otherSize.y + 10 }, "Chars: " + msg.str());
-    handler->setColor(Input::mousePressed(1) ? Colors::BLUE : Colors::RED);
-    handler->drawRect(Input::getMousePos() - 5, { 10, 10 }, true);
-  });
-
-  Hazard::onQuit([]() {
-    std::cout << "Bye!\n";
+    handler->setColor(Colors::RED);
+    mouse.render(handler);
   });
 
   Hazard::run();
   Hazard::quit();
-  return EXIT_SUCCESS;
 }
