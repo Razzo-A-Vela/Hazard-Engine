@@ -11,12 +11,12 @@
 
 class PaintHandler {
 public:
-  PaintHandler(Window* window) : window(window) {}
-  void drawRect(Vector2Int pos, Vector2Int size, bool fill);
+  PaintHandler(Window* window) : window(window) { currentColor.toRenderer(window->renderer); }
+  void drawRect(Vector2Int pos, Vector2Int size, bool fill = true);
   Vector2Int drawText(Vector2Int pos, std::string text);
   void fillBackground(Color color);
 
-  void setColor(Color color) { currentColor = color; }
+  void setColor(Color color) { currentColor = color; currentColor.toRenderer(window->renderer); }
   void setFont(std::string font) { currentFont = font; }
 
   static inline const std::string DEFAULT_FONT = "";

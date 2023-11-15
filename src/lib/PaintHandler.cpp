@@ -2,7 +2,6 @@
 
 void PaintHandler::drawRect(Vector2Int pos, Vector2Int size, bool fill) {
   SDL_Rect rect = SDL_Rect{pos.x, pos.y, size.x, size.y};
-  currentColor.toRenderer(window->renderer);
   if (fill)
     SDL_RenderFillRect(window->renderer, &rect);
   else
@@ -30,4 +29,5 @@ Vector2Int PaintHandler::drawText(Vector2Int pos, std::string text) {
 void PaintHandler::fillBackground(Color color) {
   color.setAlpha(255).toRenderer(window->renderer);
   SDL_RenderClear(window->renderer);
+  currentColor.toRenderer(window->renderer);
 }
