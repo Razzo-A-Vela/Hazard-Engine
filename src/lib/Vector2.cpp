@@ -46,11 +46,11 @@ Vector2 Vector2::operator/(float f) const {
 
 
 Vector2 Vector2::copy() const {
-  return Vector2(x, y);
+  return { x, y };
 }
 
 Vector2Int Vector2::toInt() const {
-  return Vector2Int((int) x, (int) y);
+  return { (int) x, (int) y };
 }
 
 
@@ -101,9 +101,9 @@ Vector2Int Vector2Int::operator/(int i) const {
 
 
 Vector2Int Vector2Int::copy() const {
-  return Vector2Int(x, y);
+  return { x, y };
 }
 
 Vector2 Vector2Int::toFloat() const {
-  return Vector2((float) x, (float) y);
+  return { (float) x, (float) y };
 }
