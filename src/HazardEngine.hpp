@@ -6,8 +6,10 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+#include "types\Rect.hpp"
 #include "types\Vector2.hpp"
 #include "types\Window.hpp"
+#include "types\Color.hpp"
 #include "Painthandler.hpp"
 #include "FontHandler.hpp"
 #include "Input.hpp"
@@ -21,7 +23,7 @@ class Hazard {
 public:
   static void init();
   static void createWindow(std::string title, Vector2Int size);
-  static void quit();
+  static void quit(int code = 0);
   static void run();
   static void onUpdate(update_func update) { updateFunc = update; }
   static void onDraw(draw_func draw) { drawFunc = draw; }

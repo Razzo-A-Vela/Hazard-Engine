@@ -3,6 +3,10 @@
 void Hazard::init() {
   if (initialized) return;
   std::cout << "Initializing Hazard Engine...\n";
+  updateFunc = NULL;
+  drawFunc = NULL;
+  quitFunc = NULL;
+  
   SDL_Init(SDL_INIT_VIDEO);
   TTF_Init();
   Input::init();
@@ -18,14 +22,14 @@ void Hazard::createWindow(std::string title, Vector2Int size) {
   window = new Window{size, sdl_window, renderer};
 }
 
-void Hazard::quit() {
+void Hazard::quit(int code) {
   if (quitFunc != NULL) quitFunc();
   FontHandler::close();
   TTF_Quit();
   SDL_DestroyRenderer(window->renderer);
   SDL_DestroyWindow(window->window);
   SDL_Quit();
-  initialized = false;
+  exit(code);
 }
 
 void Hazard::run() {
