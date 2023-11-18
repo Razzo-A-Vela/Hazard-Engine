@@ -5,12 +5,13 @@
 int main() {
   Hazard::init();
   FontHandler::addFont("", ".\\comic-sans-ms.ttf", 32);
+  static const RectInt otherRect = { { 250, 100 }, { 100, 100 } };
 
   Hazard::createWindow("Prova", { 500, 500 });
   static Rect player = { (Hazard::getWindowSize() / 2).toFloat(), { 50, 50 } };
   player.pos = player.pos - player.size / 2.0f;
   static RectInt mouse = { { 0, 0 }, { 10, 10 } };
-  static const RectInt otherRect = { { 250, 100 }, { 100, 100 } };
+  static Color playerColor = Random::color();
 
   Hazard::onUpdate([](double deltaTime) {
     float horizontal = Input::getAxis(Axis::horizontal);
@@ -19,6 +20,9 @@ int main() {
 
     mouse.pos = Input::getMousePos() - (mouse.size / 2);
     
+    if (Input::keyDown(Keys::toKeyCode('r')))
+      playerColor = Random::color();
+
     if (Input::keyDown(Keys::Escape)) 
       Hazard::quit(1);
   });
@@ -32,7 +36,7 @@ int main() {
       handler->setColor(Colors::CYAN);
     otherRect.render(handler, true);
 
-    handler->setColor(Colors::YELLOW);
+    handler->setColor(playerColor);
     player.render(handler, true);
 
     handler->setColor(Colors::WHITE);
