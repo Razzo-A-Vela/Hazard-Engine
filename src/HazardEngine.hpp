@@ -13,6 +13,7 @@
 #include "Painthandler.hpp"
 #include "FontHandler.hpp"
 #include "Input.hpp"
+#include "Random.hpp"
 
 
 typedef void (*update_func)(double deltaTime);

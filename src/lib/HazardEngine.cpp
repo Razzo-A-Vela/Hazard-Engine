@@ -10,6 +10,7 @@ void Hazard::init() {
   SDL_Init(SDL_INIT_VIDEO);
   TTF_Init();
   Input::init();
+  Random::init();
   initialized = true;
 }
 
