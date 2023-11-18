@@ -47,7 +47,7 @@ struct Vector2Int {
   Vector2Int operator/(Vector2Int other) const;
   Vector2Int operator/(int i) const;
 
-
+  float mag() const;
   float dist(Vector2Int other) const;
 
   Vector2Int copy() const;

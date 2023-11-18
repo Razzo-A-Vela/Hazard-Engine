@@ -122,6 +122,10 @@ Vector2Int Vector2Int::operator/(int i) const {
 }
 
 
+float Vector2::mag() const {
+  return sqrt(x*x + y*y);
+}
+
 float Vector2Int::dist(Vector2Int other) const {
   int xx = (other.x - x);
   int yy = (other.y - y);
