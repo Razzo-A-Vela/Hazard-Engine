@@ -3,6 +3,10 @@
 #include <SDL.h>
 
 struct Color {
+  Uint8 r;
+  Uint8 g;
+  Uint8 b;
+  Uint8 a;
   Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) : r(r), g(g), b(b), a(a) {}
 
   Color setAlpha(Uint8 alpha) {
@@ -20,11 +24,6 @@ struct Color {
   void toRenderer(SDL_Renderer* renderer) {
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
   }
-
-  Uint8 r;
-  Uint8 g;
-  Uint8 b;
-  Uint8 a;
 };
 
 namespace Colors {
