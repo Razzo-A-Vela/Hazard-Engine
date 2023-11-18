@@ -45,6 +45,28 @@ Vector2 Vector2::operator/(float f) const {
 }
 
 
+Vector2 Vector2::normalize() const {
+  float m = mag();
+  return m != 0 ? copy() / m : Vector2();
+}
+
+float Vector2::mag() const {
+  return sqrt(x*x + y*y);
+}
+
+Vector2 Vector2::mag(float value) const {
+  return normalize() * value;
+}
+
+float Vector2::dist(Vector2 other) const {
+  float xx = (other.x - x);
+  float yy = (other.y - y);
+  xx *= xx;
+  yy *= yy;
+  
+  return sqrt(xx + yy);
+}
+
 Vector2 Vector2::copy() const {
   return { x, y };
 }
@@ -99,6 +121,15 @@ Vector2Int Vector2Int::operator/(int i) const {
   return (*this) / Vector2Int(i, i);
 }
 
+
+float Vector2Int::dist(Vector2Int other) const {
+  int xx = (other.x - x);
+  int yy = (other.y - y);
+  xx *= xx;
+  yy *= yy;
+  
+  return sqrt(xx + yy);
+}
 
 Vector2Int Vector2Int::copy() const {
   return { x, y };
