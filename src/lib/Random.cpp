@@ -6,8 +6,7 @@ float Random::range(float min, float max) {
 }
 
 int Random::rangeInt(int min, int max) {
-  if (max <= min) return 0;
-  return rand() % (max - min) + min;
+  return (int) range((float) min, (float) max);
 }
 
 Vector2Int Random::vectorRange(Vector2Int min, Vector2Int max) {
