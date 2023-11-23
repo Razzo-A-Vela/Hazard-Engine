@@ -122,7 +122,7 @@ Vector2Int Vector2Int::operator/(int i) const {
 }
 
 
-float Vector2::mag() const {
+float Vector2Int::mag() const {
   return sqrt(x*x + y*y);
 }
 
