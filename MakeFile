@@ -1,5 +1,5 @@
-includes = "-I" "include" "-I" "SDL\include" "-I" "SDL_TTF\include"
-libs = "-L" "SDL\lib" "-L" "SDL_TTF\lib" "lib\**"
+includes = "-I" "src\include" "-I" "SDL\include" "-I" "SDL_TTF\include"
+libs = "-L" "SDL\lib" "-L" "SDL_TTF\lib" "src\lib\**"
 dlls = "-lSDL2main" "-lSDL2" "-lSDL2_ttf"
 
 
