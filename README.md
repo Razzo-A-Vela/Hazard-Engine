@@ -1,6 +1,15 @@
 # Hazard Engine
 
 My own game engine
+
+<br>
+
+## If you use VsCode :
+* You need to modify **BOTH** MakeFile and launch.json
+
+## If you don't :
+* Delete the .vscode folder
+
 <br>
 
 ### Dependencies
