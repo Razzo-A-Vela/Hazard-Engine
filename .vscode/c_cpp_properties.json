@@ -5,7 +5,7 @@
             "includePath": [
               "${workspaceFolder}/SDL/include",
               "${workspaceFolder}/SDL_TTF/include",
-              "${workspaceFolder}/include"
+              "${workspaceFolder}/src/include"
             ],
             "cppStandard": "c++20"
         }
