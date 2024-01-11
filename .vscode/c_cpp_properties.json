@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+              "${workspaceFolder}/SDL/include",
+              "${workspaceFolder}/SDL_TTF/include",
+              "${workspaceFolder}/Hazard-Engine/include"
+            ],
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}
