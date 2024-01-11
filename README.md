@@ -2,6 +2,8 @@
 
 My own game engine
 
+### Get an example package to start [here](https://github.com/Razzo-A-Vela/Hazard-Engine/releases/tag/v0.0.1)
+
 <br>
 
 ### Dependencies
