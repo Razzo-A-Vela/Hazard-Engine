@@ -32,6 +32,8 @@ public:
   static int getFPS() { return fps; }
   static Vector2Int getWindowSize() { return window->size; }
 
+  static inline const std::string version = "0.0.1";
+
 private:
   static inline int fps = 0;
   static inline double deltaTime = 0;

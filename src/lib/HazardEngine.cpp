@@ -2,7 +2,7 @@
 
 void Hazard::init() {
   if (initialized) return;
-  std::cout << "Initializing Hazard Engine...\n";
+  std::cout << "Initializing Hazard Engine v" << version << "...\n";
   updateFunc = NULL;
   drawFunc = NULL;
   quitFunc = NULL;
