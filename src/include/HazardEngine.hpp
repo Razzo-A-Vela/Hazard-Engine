@@ -32,7 +32,7 @@ public:
   static int getFPS() { return fps; }
   static Vector2Int getWindowSize() { return window->size; }
 
-  static inline const std::string version = "0.0.1";
+  static inline const std::string version = "0.0.2";
 
 private:
   static inline int fps = 0;
