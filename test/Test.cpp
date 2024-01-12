@@ -7,7 +7,8 @@ int main() {
   FontHandler::addFont("", ".\\comic-sans-ms.ttf", 32);
   static const RectInt otherRect = { { 250, 100 }, { 100, 100 } };
 
-  Hazard::createWindow("Prova", { 500, 500 });
+  constexpr int height = 1080; // 1080p
+  Hazard::createWindow("Prova", { height / 8 * 16, height }, true);
   static Rect player = { (Hazard::getWindowSize() / 2).toFloat(), { 50, 50 } };
   player.pos = player.pos - player.size / 2.0f;
   static RectInt mouse = { { 0, 0 }, { 10, 10 } };

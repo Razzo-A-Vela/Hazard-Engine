@@ -14,13 +14,16 @@ void Hazard::init() {
   initialized = true;
 }
 
-void Hazard::createWindow(std::string title, Vector2Int size) {
+void Hazard::createWindow(std::string title, Vector2Int size, bool fullscreen) {
   Hazard::init();
   std::cout << "Window size: " << size.x << ", " << size.y << "\n";
 
   SDL_Window* sdl_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, size.x, size.y, SDL_WINDOW_SHOWN | SDL_WINDOW_VULKAN);
   SDL_Renderer* renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
   window = new Window{size, sdl_window, renderer};
+
+  if (fullscreen)
+    SDL_SetWindowFullscreen(sdl_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
 
 void Hazard::quit(int code) {

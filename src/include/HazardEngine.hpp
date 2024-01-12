@@ -23,7 +23,7 @@ typedef void (*quit_func)(void);
 class Hazard {
 public:
   static void init();
-  static void createWindow(std::string title, Vector2Int size);
+  static void createWindow(std::string title, Vector2Int size, bool fullscreen = false);
   static void quit(int code = 0);
   static void run();
   static void onUpdate(update_func update) { updateFunc = update; }
