@@ -37,6 +37,9 @@ int main() {
       handler->setColor(Colors::CYAN);
     otherRect.render(handler, true);
 
+    handler->setColor(Colors::WHITE);
+    handler->drawLine({ 100, 100 }, { 200, 200 });
+
     handler->setColor(playerColor);
     player.render(handler, true);
 

@@ -26,6 +26,10 @@ Vector2Int PaintHandler::drawText(Vector2Int pos, std::string text) {
   return { rect.w, rect.h };
 }
 
+void PaintHandler::drawLine(Vector2Int pos1, Vector2Int pos2) {
+  SDL_RenderDrawLine(window->renderer, pos1.x, pos1.y, pos2.x, pos2.y);
+}
+
 void PaintHandler::fillBackground(Color color) {
   color.setAlpha(255).toRenderer(window->renderer);
   SDL_RenderClear(window->renderer);

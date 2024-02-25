@@ -14,6 +14,7 @@ public:
   PaintHandler(Window* window) : window(window) { currentColor.toRenderer(window->renderer); }
   void drawRect(Vector2Int pos, Vector2Int size, bool fill = true);
   Vector2Int drawText(Vector2Int pos, std::string text);
+  void drawLine(Vector2Int pos1, Vector2Int pos2);
   void fillBackground(Color color);
 
   void setColor(Color color) { currentColor = color; currentColor.toRenderer(window->renderer); }
